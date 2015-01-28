@@ -1,5 +1,5 @@
 zuora is a wrapper that allows easy operations through the Zuora REST API.
-It uses the restify client to make requests and an internal validator to do basic validation beforehand.
+It uses the request library to make requests and an internal validator to do basic validation beforehand.
 It also parses the errors coming from zuora to provide a readable format if possible.
 
 # Usage
@@ -13,13 +13,20 @@ zuora exports the create method for creating a new zuora object
 
 The following options are available:
 
-+ user:(required)  *The user used to authenticate with zuora
-+ password:(required) *The password for zuora user
-+ log: *Bunyan logger
-+ catalogTTL: *Time to live for the internal catalog cache
-+ validation: *Options for the validation
-+ url: *The zuora endpoint url
-+ production: *If url is not provided then this flag will determine whether api or apisandbox-api.zuora.com will be used
++ user:(required)
+    + The user used to authenticate with zuora
++ password:(required)
+    + The password for zuora user
++ log:
+    + Bunyan logger
++ catalogTTL:
+    + Time to live for the internal catalog cache
++ validation:
+    + Options for the validation
++ url:
+    + The zuora endpoint base url (api or apisandbox-api.zuora.com)
++ production:
+    + If url is not provided then this flag will determine whether api or apisandbox-api.zuora.com will be used
 
 ## Methods
 
@@ -31,27 +38,30 @@ The zuora client will have the following objects
     + summary (id, callback) - Retrieves detailed information about the specified customer account.
     + update (id, data, callback) - Updates the specified customer account.
 + catalog - Wrapper for Catalog operations
-	+ get ([opts], callback) - Retrieves the entire product catalog, including all products and their corresponding rate plans and charges.
-	+ query (params, callback) - Function for querying the product catalog.
+    + get ([opts], callback) - Retrieves the entire product catalog, including all products and their corresponding rate plans and charges.
+    + query (params, callback) - Function for querying the product catalog.
 + payment - Wrapper for Payment operations
     + create (data, callback) - Creates a new credit card payment method for the specified customer account
     + get (id, [opts], callback) - Retrieves all credit card information for the specified customer account
     + update (id, data, callback) - Updates an existing credit card payment method for the specified customer account.
     + del (id, callback) - Deletes a credit card payment method from the specified customer account.
 + subscription - Wrapper for Subscription operations
-	+ preview (opts, callback) - Method for getting a subscription preview
-	+ create (opts, callback) - Method for creating a new subscription
-	+ getByAccount (id, [opts], callback) - Method for getting subscriptions by account id
-	+ getByKey (key, callback) - Method for getting a subscription by subscription key
-	+ update (key, data, callback) - Method for updating a subscription
-	+ renew (key, data, callback) - Method for renewing a subscription
-	+ cancel (key, opts, callback) - Method for cancelling a subscription
+    + preview (opts, callback) - Method for getting a subscription preview
+    + create (opts, callback) - Method for creating a new subscription
+    + getByAccount (id, [opts], callback) - Method for getting subscriptions by account id
+    + getByKey (key, callback) - Method for getting a subscription by subscription key
+    + update (key, data, callback) - Method for updating a subscription
+    + renew (key, data, callback) - Method for renewing a subscription
+    + cancel (key, opts, callback) - Method for cancelling a subscription
 + transaction - Wrapper for Transaction operations
-	+ getInvoices (id, [opts], callback) - Method for getting invoices of an account
-	+ getPayments (id, [opts], callback) - Method for getting payments of an account
-	+ collect (id, [opts], callback) - Generates invoices and collects payments for a specified account.
+    + getInvoices (id, [opts], callback) - Method for getting invoices of an account
+    + getPayments (id, [opts], callback) - Method for getting payments of an account
+    + collect (id, [opts], callback) - Generates invoices and collects payments for a specified account.
 + hmacSignature - Wrapper for HMACSignature operations
-	+ get(opts, callback) - Method to generate a new CORS signature
+    + get(opts, callback) - Method to generate a new CORS signature
++ usage - Wrapper for Usage operations
+    + post(usageData, defaultData, callback) - Method to bulk upload the usage (as a CSV file) ; returns a uploadId
+    + status(uploadId, callback) - Method to get the status of the usage upload
 
 The Zuora documentation and examples can be found at
 http://knowledgecenter.zuora.com/D_Zuora_APIs/REST_API/B_REST_API_reference
