@@ -2,7 +2,7 @@
   "author": "Karl Düüna",
   "name": "@sparkpost/zuora",
   "description": "Zuora API wrapper for Node",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "keywords": [
     "zuora",
     "rest"
